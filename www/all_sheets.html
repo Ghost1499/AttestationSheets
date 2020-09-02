@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link href="css/styles.css" rel="stylesheet" type="text/css">
+    <title>Аттестационные ведомости</title>
+</head>
+<body>
+<nav class="bar" id="nav-top-menu">
+    <a class="bar-item w3-hover-blue-gray btn" id="home-item">Домашняя</a>
+    <a class="bar-item w3-hover-blue-gray btn" id="sheets-item">Все ведомости</a>
+</nav>
+<div class="main">
+    <div id="sheet-menu">
+        <form id="sheet-form">
+            <section class="row" id="course-section">
+                <label>Курс:</label>
+                <select id="course-selection" name="course">
+                    <optgroup label="Выберите курс">
+                        <option>Все курсы</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                    </optgroup>
+                </select>
+            </section>
+            <section class="row" id="group-section">
+                <label>Группа:</label>
+                <select id="group-selection" name="group">
+                    <optgroup label="Выберите группу">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                    </optgroup>
+                </select>
+            </section>
+            <section class="row" id="subject-section">
+                <label>Предмет:</label>
+                <select id="subject-selection" name="subject">
+                    <optgroup label="Выберите предмет">
+                        <option>Математический анализ</option>
+                        <option>Линейная алгебра и аналитическая геометрия</option>
+                        <option>Введение в программирование</option>
+                    </optgroup>
+                </select>
+            </section>
+        </form>
+    </div>
+    <div id="sheet-space">
+        <div class="sheet shadowed padding btn">
+            <h1>Аттестация Программирование</h1>
+            <p>3 курс 2 группа 2019 год</p>
+        </div>
+        <div class="sheet shadowed padding btn">
+            <h1>Аттестация Программирование</h1>
+            <p>3 курс 2 группа 2019 год</p>
+        </div>
+    </div>
+</div>
+<!--<footer id="footer" class="bar">
+
+</footer>-->
+</body>
+</html>
