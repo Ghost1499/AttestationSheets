@@ -14,8 +14,8 @@
     <div id="login-page-title" class="display-middle text-shadowed no-wrap">
         Attestation Sheets
     </div>
-    <button onclick="document.location='sheets.html'" id="login-button" class="card w3-orange login-btns w3-xlarge" >Войти</button>
-    <button id="signup-button" class="card w3-orange login-btns w3-xlarge">Зарегистрироваться</button>
+    <a href="/sheets" id="login-button" class="card w3-orange login-btns w3-xlarge" >Войти</a>
+    <a id="signup-button" class="card w3-orange login-btns w3-xlarge">Зарегистрироваться</a>
 </div>
 </body>
 </html>

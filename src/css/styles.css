@@ -11,18 +11,19 @@ h1 {
 }
 
 .main {
-    margin-top: 5%;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
-#footer {
-    background-color: lig;
-}
 
 /*Login page*/
 .login-page-bgimg{
     background-image: url("../images/background.jpeg");
     background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100%;
 }
 
 #login-page-title {
@@ -76,6 +77,28 @@ h1 {
 }
 .sheet:hover{
     background-color: lightgrey;
+}
+
+/*sheet_page page*/
+#attestation-sheet-header {
+    text-align: center;
+}
+
+#attestation-table {
+    box-sizing: border-box;
+    table-layout: fixed;
+    width: 980px;
+    border: 1px solid black;
+    margin-top: 16px;
+    border-collapse: collapse;
+    empty-cells: show;
+    font-size: small;
+    text-align: center;
+}
+
+#attestation-table td,th {
+    border: 1px solid black;
+    vertical-align: middle;
 }
 
 .row {
@@ -151,6 +174,14 @@ h1 {
 .padding{
     padding: 10px !important;
 }
+.w3-margin{margin:16px!important}.w3-margin-top{margin-top:16px!important}.w3-margin-bottom{margin-bottom:16px!important}
+.w3-margin-left{margin-left:16px!important}.w3-margin-right{margin-right:16px!important}
+.w3-padding-small{padding:4px 8px!important}.w3-padding{padding:8px 16px!important}.w3-padding-large{padding:12px 24px!important}
+.w3-padding-16{padding-top:16px!important;padding-bottom:16px!important}.w3-padding-24{padding-top:24px!important;padding-bottom:24px!important}
+.w3-padding-32{padding-top:32px!important;padding-bottom:32px!important}.w3-padding-48{padding-top:48px!important;padding-bottom:48px!important}
+.w3-padding-64{padding-top:64px!important;padding-bottom:64px!important}
+.w3-left{float:left!important}.w3-right{float:right!important}
+
 
 .w3-tiny{font-size:10px!important}.w3-small{font-size:12px!important}.w3-medium{font-size:15px!important}.w3-large{font-size:18px!important}
 .w3-xlarge{font-size:24px!important}.w3-xxlarge{font-size:36px!important}.w3-xxxlarge{font-size:48px!important}.w3-jumbo{font-size:64px!important}
