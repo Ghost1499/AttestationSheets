@@ -19,21 +19,24 @@
 
         public function __get($name)
         {
-            return $this->$name;
+            return $this->name;
         }
-        public static function getParams(){
+        /*public static function getParams(){
             $parts=explode('/', $this->path);
             foreach ($parts as $part){
                 if($part[0]==)
             }
-        }
+        }*/
 
         public function tryGetTrack($path,&$track){
-            $example_parts=explode('/',$this->$path);
+            $example_parts=explode('/',$this->path);
             $current_parts=explode('/', $path);
             $params=array();
             $track=null;
+            /*print_r($example_parts);
+            print_r($current_parts);*/
             if(count($example_parts)!=count($current_parts)){
+
                 return false;
             }
             $isSuccessfull=false;

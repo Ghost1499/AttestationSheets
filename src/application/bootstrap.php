@@ -35,6 +35,7 @@
         Router::ErrorPage404();
     }
     // запускаем маршрутизатор
+    //print_r($router);
     $router->start();
 
     //Router::start(); // запускаем маршрутизатор

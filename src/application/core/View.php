@@ -22,6 +22,6 @@
             внутри которого будет встраиваться вид
             для отображения контента конкретной страницы.
             */
-            include SITE_PATH.DS.'views'.DS.$template_view.'.php';
+            include APP_PATH.DS.'views'.DS.$template_view;
         }
     }

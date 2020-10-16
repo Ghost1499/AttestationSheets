@@ -6,12 +6,13 @@
     {
         private $path;
         private $routes;
-        private $args = array();
+        //private $args = array();
 
         function __construct()
         {
-            $routes=require APP_PATH.DS.'config/routes.php';
-            print_r($routes);
+            $this->routes=require (APP_PATH.DS.'config/routes.php');
+            //echo APP_PATH.DS.'config/routes.php';
+            //print_r($routes);
 
         }
 
@@ -32,16 +33,20 @@
         private function getTrack($route/*,&$file, &$controller, &$action, &$args*/)
         {
             $track=null;
+
             if (empty($route))
             {
-                $track = new Track();
-            }
 
+                $track = new Track();
+                return $track;
+            }
             foreach ($this->routes as $current_route){
                 if($current_route->tryGetTrack($route,$track)){
                     continue;
                 }
             }
+//            print_r($track);
+
             if($track==null){
                 throw new Exception("Appropriate route not found");
             }
@@ -94,33 +99,54 @@
         function start()
         {
             $route=$this->_setRoute($_GET['route']);
+            //$route='/'.$route;
             unset($_GET['route']);
             // Анализируем путь
-            $track=$this->getTrack($route);
+            //$track=null;
+            try{
+                $track=$this->getTrack($route);
+            }
+            catch (Exception $e){
+
+                Router::ErrorPage404();
+            }
             //echo $file,$controller,$action,$args;
             // Проверка существования файла, иначе 404
-
+            $file=$this->getFile($track);
+            //echo $file;
             if (is_readable($file) == false)
             {
-                die ('404 Not Found');
+               Router::ErrorPage404();
             }
 
             // Подключаем файл
             include($file);
             // Создаём экземпляр контроллера
-            $class = $controller;
+            $class = $this->getClass($track);
             $controller = new $class();
-
+            $action=$this->getAction($track);
             // Если экшен не существует - 404
             if (is_callable(array($controller, $action)) == false)
             {
-                die ('404 Not Found');
+                //echo fff;
+                Router::ErrorPage404();
             }
 
             // Выполняем экшен
-            $controller->$action($args);
+            $controller->$action($track->params);
         }
-
+        private function getFile($track){
+            $file = $this->path ."Controller_". $track->controller . '.php';
+            return $file;
+        }
+        private function getClass($track){
+            $class ="Controller_". $track->controller;
+            return $class;
+        }
+        private function getAction($track){
+            $action ="action_". $track->action;
+            return $action;
+        }
         static function ErrorPage404()
         {
             $host = 'http://' . $_SERVER['HTTP_HOST'] . '/';

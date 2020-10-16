@@ -10,13 +10,12 @@
         {
             parent::__construct();
             $this->marks = new Model_mark_on_exam();
-            $this->content_view='main_view';
+            $this->content_view='main_view.php';
         }
 
         public function action_index()
         {
             $this->view->generate($this->template_view,$this->content_view);
-
         }
 
         /**
