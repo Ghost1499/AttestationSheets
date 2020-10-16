@@ -10,7 +10,7 @@
 <body>
 <div data-src="modules/nav_top_menu.html"></div>
 <div class="main">
-<?php $content_view; ?>
+<?php include SITE_PATH.DS.'views'.DS.$content_view.'.html'; ?>
 </div>
 
 </body>

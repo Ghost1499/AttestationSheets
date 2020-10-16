@@ -8,6 +8,7 @@
 
         public function __construct()
         {
+            parent::__construct();
             $this->marks = new Model_mark_on_exam();
             $this->content_view='main_view';
         }

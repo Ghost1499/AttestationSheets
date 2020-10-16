@@ -22,12 +22,12 @@ function __autoload($className) {
 		}
 	}
 	// путь до класса
-	$file = SITE_PATH .DS. $folder . DS . $filename;
-	//echo $file;
+	$file = APP_PATH .DS. $folder . DS . $filename;
 	// проверяем наличие файла
 	if (file_exists($file) == false) {
 		return false;
-	}		
+	}
+
 	// подключаем файл с классом
 	include ($file);
 }
