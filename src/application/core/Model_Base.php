@@ -15,14 +15,14 @@
 
             // имя таблицы
             $modelName = get_class($this);
-            $arrExp = explode('_', $modelName);
+            $arrExp = explode('_', $modelName,2);
             $tableName = strtolower($arrExp[1]);
             $this->table = $tableName;
 
             // обработка запроса, если нужно
             $sql = $this->_getSelect($select);
             if ($sql)
-                $this->_getResult("SELECT * FROM $this->table" . $sql);
+                $this->_getResult($sql);
         }
 
         // получить имя таблицы
@@ -141,6 +141,7 @@
                     $querySql .= " SELECT *" . $val;
 
                 }
+                $querySql.=' FROM '.$this->getTableName().' ';
 
                 if (in_array("JOIN", $allQuery))
                 {
@@ -155,16 +156,11 @@
 
                 if (in_array("WHERE", $allQuery))
                 {
-                    $firstWhere=true;
                     foreach ($select as $key => $val)
                     {
                         if (strtoupper($key) == "WHERE")
                         {
-                            if($firstWhere)
                                 $querySql .= " WHERE " . $val;
-                            else{
-                                $querySql .= " AND " . $val;
-                            }
                         }
                     }
                 }
@@ -222,6 +218,7 @@
         // выполнение запроса к базе данных
         private function _getResult($sql)
         {
+            //echo $sql;
             try
             {
                 $db = $this->db;

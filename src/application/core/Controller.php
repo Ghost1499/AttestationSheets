@@ -12,6 +12,6 @@
 
 
         }
-        public abstract function action_index();
+        public abstract function action_index($params=null);
 
     }
