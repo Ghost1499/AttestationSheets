@@ -3,7 +3,7 @@
 function __autoload($className) {
 	$filename = $className . '.php';
 	// определяем класс и находим для него путь
-	$expArr = explode('_', $className);
+	$expArr = explode('_', $className,2);
 	if(empty($expArr[1]) OR $expArr[1] == 'Base'){
 		$folder = 'core';
 	}else{			
