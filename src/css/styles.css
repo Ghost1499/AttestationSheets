@@ -16,7 +16,12 @@ h1 {
     margin-right: 10px;
 }
 
+/*nav-top-menu*/
+#nav-top-menu a{
+    text-decoration: none;
+        color: black;
 
+}
 /*Login page*/
 .login-page-bgimg{
     background-image: url("../images/background.jpeg");

@@ -4,4 +4,4 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} !^/css/
 RewriteCond %{REQUEST_URI} !^/js/
 RewriteCond %{REQUEST_URI} !^/modules/
-RewriteRule ^(.*)$ index.php?route=$1 [L,QSA]
+RewriteRule ^(.*)$ index.php?$1 [L,QSA]

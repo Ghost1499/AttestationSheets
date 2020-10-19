@@ -10,11 +10,11 @@
         {
 
 
-            /*if(is_array($data)) {
+            if(is_array($data)) {
 
                 // преобразуем элементы массива в переменные
                 extract($data);
-            }*/
+            }
 
             //print_r($data);
             /*

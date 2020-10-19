@@ -30,22 +30,27 @@
         }
 
         // определение контроллера и экшена из урла
-        private function getTrack($route/*,&$file, &$controller, &$action, &$args*/)
+
+        /**
+         * @param MyUrl $url
+         * @return Track|null
+         * @throws Exception
+         */
+        private function getTrack($url/*,&$file, &$controller, &$action, &$args*/)
         {
             $track=null;
 
-            if (empty($route))
+            /*if (empty($url))
             {
-
                 $track = new Track();
                 return $track;
-            }
+            }*/
             foreach ($this->routes as $current_route){
-                if($current_route->tryGetTrack($route,$track)){
-                    continue;
+                //var_dump($current_route);
+                if($current_route->tryGetTrack($url,$track)){
+                    break;
                 }
             }
-//            print_r($track);
 
             if($track==null){
                 throw new Exception("Appropriate route not found");
@@ -94,22 +99,23 @@
         }
 
         private function _setRoute($val){
-            return empty($val) ? '' : $val;
+            return empty($val) ? '/' : $val;
         }
         function start()
         {
-            $route=$this->_setRoute($_GET['route']);
-            //$route='/'.$route;
-            unset($_GET['route']);
+            $route=$this->_setRoute($_SERVER['REQUEST_URI']);
+            //echo $route;
+            $url=new MyUrl($route);
             // Анализируем путь
             //$track=null;
             try{
-                $track=$this->getTrack($route);
+                $track=$this->getTrack($url);
             }
             catch (Exception $e){
 
                 Router::ErrorPage404();
             }
+
             //echo $file,$controller,$action,$args;
             // Проверка существования файла, иначе 404
             $file=$this->getFile($track);

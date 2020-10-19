@@ -28,9 +28,15 @@
             }
         }*/
 
-        public function tryGetTrack($path,&$track){
+        /**
+         * @param MyUrl $url
+         * @param Track $track
+         * @return bool
+         */
+        public function tryGetTrack($url, &$track){
             $example_parts=explode('/',$this->path);
-            $current_parts=explode('/', $path);
+            $current_parts=explode('/', $url->path);
+            //var_dump($example_parts,$current_parts);
             $params=array();
             $track=null;
             /*print_r($example_parts);
@@ -39,23 +45,24 @@
 
                 return false;
             }
-            $isSuccessfull=false;
             for($i=0;$i<count($example_parts);$i++){
+
                 if(substr($example_parts[$i], 0,1)==":"){
                     $currPartName=substr($example_parts[$i],1);
-                    $params[$currPartName]=$current_parts[$i];
+                    $url->params[$currPartName]=$current_parts[$i];
                     continue;
                 }
-                if($example_parts[$i]==$current_parts[$i])
+                if($example_parts[$i] != $current_parts[$i])
                 {
-                }
-                else{
+
                     return false;
                 }
             }
-            if(count($params)==0)
-                $params=null;
-            $track=new Track($this->controller,$this->action,$params);
+            /*if(count($params)==0)
+                $params=null;*/
+
+            $track=new Track($this->controller,$this->action,$url->params);
+            return true;
         }
 
     }

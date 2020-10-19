@@ -1,7 +1,6 @@
 <div id="sheet-menu">
-
     <?php
-        $generator=new Generator_sheet_menu($data);
+        $generator=new Generator_sheet_menu($sheets_menu_data);
         $generator->GenerateSheetMenu(); ?>
 </div>
 </div>

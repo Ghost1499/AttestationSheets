@@ -8,7 +8,7 @@
             $this->model=new Model_user();
         }
 
-        public function action_index(){
+        public function action_index($params=null){
             $this->view->generate('login_view.php');
         }
 
