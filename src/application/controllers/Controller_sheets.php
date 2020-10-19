@@ -21,7 +21,7 @@
             $spec_code = (isset($params['speciality_code'])) ? (int)$params['speciality_code'] : false;
             $group_id = (isset($params['group_id'])) ? (int)$params['group_id'] : false;*/
 
-            $select = array('select' => 'DISTINCT mark_on_exam.semester_course_id AS sem_course_id, mark_on_exam.attestation_number as att_number, semester_course.semester_number as semester_number,semester_course.studiyng_year as studiyng_year,speciality.speciality_name as spec_name, semester_course.speciality_code as spec_code, student.group_number as group_number',
+            $select = array('select' => 'DISTINCT mark_on_exam.semester_course_id AS sem_course_id, mark_on_exam.attestation_number as att_number, semester_course.semester_number as semester_number,semester_course.course_number as course_number,semester_course.studiyng_year as studiyng_year,speciality.speciality_name as spec_name, semester_course.speciality_code as spec_code, student.group_number as group_number',
 
                 'join' => "LEFT JOIN semester_course ON mark_on_exam.semester_course_id=semester_course.semester_course_id
 LEFT JOIN speciality ON semester_course.speciality_code=speciality.speciality_code
@@ -57,7 +57,9 @@ LEFT JOIN student ON semester_course.semester_course_id=student.semester_course_
 
             $this->marks = new Model_mark_on_exam($select); // создаем объект модели
             $sheets_data = $this->marks->getAllRows(); // получаем все строки
-            $data=compact('sheets_menu_data','sheets_data');
+            //var_dump($sheets_data);
+            $selectionNames=['studiyng_year','semester_number','spec_code','group_number'];
+            $data=compact('sheets_menu_data','sheets_data','selectionNames');
             $this->view->generate($this->template_view, $this->content_view, $data);
         }
 

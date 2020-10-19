@@ -3,10 +3,9 @@
 
     class Generator_sheet_menu
     {
-        public function __construct($data)
+        public function __construct($data,$selectionNames)
         {
-            $this->selectionNames=[];
-            array_push($this->selectionNames,'studiyng_year','semester_number','spec_code','group_number','att_number');
+            $this->selectionNames=$selectionNames;
             $this->options=[];
             foreach ($this->selectionNames as $item)
             {
@@ -22,7 +21,7 @@
             array_push( $this->formParams,['name'=>"semester_number",'sectionLabelText'=>'Номер семестра','optgroupParams'=>['label'=>'Выберите номер семестра','firstOption'=>'Все семестры']]);
             array_push( $this->formParams,['name'=>"spec_code",'sectionLabelText'=>'Специальность','optgroupParams'=>['label'=>'Выберите специальность','firstOption'=>'Все специальности']]);
             array_push( $this->formParams,['name'=>"group_number",'sectionLabelText'=>'Группа','optgroupParams'=>['label'=>'Выберите группу','firstOption'=>'Все группы']]);
-            array_push( $this->formParams,['name'=>"att_number",'sectionLabelText'=>'Аттестация','optgroupParams'=>['label'=>'Выберите аттестацию','firstOption'=>'Все аттестации']]);
+            //array_push( $this->formParams,['name'=>"att_number",'sectionLabelText'=>'Аттестация','optgroupParams'=>['label'=>'Выберите аттестацию','firstOption'=>'Все аттестации']]);
             for($i=0;$i<count($this->options);$i++){
                 $this->addOptionsList($i);
             }
