@@ -21,6 +21,8 @@
 
             // обработка запроса, если нужно
             $sql = $this->_getSelect($select);
+            echo $sql.' <br /> ';
+
             if ($sql)
                 $this->_getResult($sql);
         }

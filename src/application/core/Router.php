@@ -8,6 +8,9 @@
         private $routes;
         //private $args = array();
 
+        /**
+         * Router constructor.
+         */
         function __construct()
         {
             $this->routes=require (APP_PATH.DS.'config/routes.php');
@@ -103,8 +106,9 @@
         }
         function start()
         {
+
             $route=$this->_setRoute($_SERVER['REQUEST_URI']);
-            //echo $route;
+//            echo $route;
             $url=new MyUrl($route);
             // Анализируем путь
             //$track=null;
@@ -139,7 +143,14 @@
             }
 
             // Выполняем экшен
-            $controller->$action($track->params);
+            try
+            {
+                $controller->$action($track->params);
+
+            }
+            catch (Exception $ex){
+                Router::ErrorPage404();
+            }
         }
         private function getFile($track){
             $file = $this->path ."Controller_". $track->controller . '.php';

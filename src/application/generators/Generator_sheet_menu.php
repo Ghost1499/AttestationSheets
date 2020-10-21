@@ -19,7 +19,7 @@
             $this->formParams=[];
             array_push( $this->formParams,['name'=>"studiyng_year",'sectionLabelText'=>'Год обучения','optgroupParams'=>['label'=>'Выберите год обучения','firstOption'=>'Все года']]);
             array_push( $this->formParams,['name'=>"semester_number",'sectionLabelText'=>'Номер семестра','optgroupParams'=>['label'=>'Выберите номер семестра','firstOption'=>'Все семестры']]);
-            array_push( $this->formParams,['name'=>"spec_code",'sectionLabelText'=>'Специальность','optgroupParams'=>['label'=>'Выберите специальность','firstOption'=>'Все специальности']]);
+            array_push( $this->formParams,['name'=>"speciality_code",'sectionLabelText'=>'Специальность','optgroupParams'=>['label'=>'Выберите специальность','firstOption'=>'Все специальности']]);
             array_push( $this->formParams,['name'=>"group_number",'sectionLabelText'=>'Группа','optgroupParams'=>['label'=>'Выберите группу','firstOption'=>'Все группы']]);
             //array_push( $this->formParams,['name'=>"att_number",'sectionLabelText'=>'Аттестация','optgroupParams'=>['label'=>'Выберите аттестацию','firstOption'=>'Все аттестации']]);
             for($i=0;$i<count($this->options);$i++){

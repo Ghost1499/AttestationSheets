@@ -9,7 +9,7 @@
         private $action;
         private $selectionNames;
 
-        public function __construct($selectionNames,$action='/sheet')
+        public function __construct($selectionNames,$action='/sheets/sheet')
         {
             $this->action=$action;
             $this->selectionNames=$selectionNames;
@@ -34,7 +34,7 @@
             $url=$this->buildQuery($action, array_intersect_key($rowData,array_flip($this->selectionNames)));
             //var_dump($rowData);
             echo "<div class=\"sheet shadowed padding btn\" onclick=\"document.location='".$url."'\"> 
-            <h1>Аттестация ".$rowData['course_number'] ." курс</h1>
+            <h1>Ведомость ".$rowData['course_number'] ." курс</h1>
             <p>".$rowData['spec_name']." ".$rowData['spec_code']." ".$rowData['semester_number']." семестр ".$rowData['group_number']." группа ".$rowData['studiyng_year']." год</p>
             </div>";
         }
