@@ -123,7 +123,7 @@
             //echo $file,$controller,$action,$args;
             // Проверка существования файла, иначе 404
             $file=$this->getFile($track);
-            //echo $file;
+//            echo $file;
             if (is_readable($file) == false)
             {
                Router::ErrorPage404();
@@ -133,22 +133,25 @@
             include($file);
             // Создаём экземпляр контроллера
             $class = $this->getClass($track);
+//            echo $class;
             $controller = new $class();
             $action=$this->getAction($track);
             // Если экшен не существует - 404
             if (is_callable(array($controller, $action)) == false)
             {
-                //echo fff;
+//                echo fff;
                 Router::ErrorPage404();
             }
 
             // Выполняем экшен
             try
             {
+//                print_r($track->params);
                 $controller->$action($track->params);
 
             }
             catch (Exception $ex){
+//                echo fff;
                 Router::ErrorPage404();
             }
         }

@@ -9,7 +9,7 @@
         $generator_sheets_list=new Generator_sheets_list($selectionNames);
         $generator_sheets_list->GenerateSheetList($sheets_data);
     ?>
-    <div class="sheet shadowed padding btn"
+    <!--<div class="sheet shadowed padding btn"
          onclick="document.location='sheet_page.html'"
     >
         <h1>Аттестация Программирование</h1>
@@ -18,5 +18,5 @@
     <div class="sheet shadowed padding btn">
         <h1>Аттестация 3 курс "Исит"</h1>
         <p>6 семестр 2 группа 2019 год</p>
-    </div>
+    </div>-->
 </div>

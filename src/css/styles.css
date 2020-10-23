@@ -93,15 +93,20 @@ h1 {
     box-sizing: border-box;
     table-layout: fixed;
     width: 980px;
-    border: 1px solid black;
+    border: 2px solid black;
     margin-top: 16px;
     border-collapse: collapse;
     empty-cells: show;
-    font-size: small;
+    font-size: 16px;
     text-align: center;
 }
 
-#attestation-table td,th {
+#attestation-table td {
+    border: 1px solid black;
+    vertical-align: middle;
+}
+
+#attestation-table th {
     border: 1px solid black;
     vertical-align: middle;
 }

@@ -21,24 +21,28 @@
         public function action_index($params = null)
         {
 
-            $select = array('select' => 'DISTINCT mark_on_exam.semester_course_id AS sem_course_id, mark_on_exam.attestation_number as att_number, semester_course.semester_number as semester_number,semester_course.course_number as course_number,semester_course.studiyng_year as studiyng_year,speciality.speciality_name as spec_name, semester_course.speciality_code as speciality_code, student.group_number as group_number',
+            $select = array('select' => 'DISTINCT mark_on_exam.semester_course_id AS sem_course_id,'. /*, mark_on_exam.attestation_number as att_number*/ 'semester_course.semester_number as semester_number,semester_course.course_number as course_number,semester_course.studiyng_year as studiyng_year,speciality.speciality_name as spec_name, semester_course.speciality_code as speciality_code, student.group_number as group_number',
 
                 'join' => "LEFT JOIN semester_course ON mark_on_exam.semester_course_id=semester_course.semester_course_id
 LEFT JOIN speciality ON semester_course.speciality_code=speciality.speciality_code
 LEFT JOIN student ON semester_course.semester_course_id=student.semester_course_id", // условие
 
-                'order' => 'semester_course.semester_number,semester_course.studiyng_year,mark_on_exam.attestation_number, semester_course.speciality_code,student.group_number' // сортируем
+                'order' => 'semester_course.semester_number,semester_course.studiyng_year DESC,mark_on_exam.attestation_number, semester_course.speciality_code,student.group_number' // сортируем
             );
+//            print_arr($select);
             $this->marks = new Model_mark_on_exam($select); // создаем объект модели
             $sheets_menu_data = $this->marks->getAllRows(); // получаем все строки
+//            print_arr($sheets_menu_data);
 
             $where = $this->getWhere($params);
             if ($where != '')
                 $select['where'] = $where;
 
+//            print_arr($select);
             $this->marks = new Model_mark_on_exam($select); // создаем объект модели
             $sheets_data = $this->marks->getAllRows(); // получаем все строки
-            //var_dump($sheets_data);
+//            print_arr($sheets_data);
+            
             $selectionNames = $this->selection_names;
             $data = compact('sheets_menu_data', 'sheets_data', 'selectionNames');
             $this->view->generate($this->template_view, $this->content_view, $data);
@@ -65,7 +69,7 @@ LEFT JOIN student ON semester_course.semester_course_id=student.semester_course_
             $sheet = $this->marks->getAllRows(); // получаем все строки
             //            print_r($sheet);
             $table_data=$this->getDataForSheetTable($sheet);
-            print_arr($table_data);
+//            print_arr($table_data);
 
             $this->view->generate($this->template_view, $content_view, $table_data);
         }
@@ -99,10 +103,10 @@ LEFT JOIN student ON semester_course.semester_course_id=student.semester_course_
                 }
                 return $where;
             }
-            else
+/*            else
             {
                 throw new Exception('Controller_sheets getWhere error');
-            }
+            }*/
         }
 
         /**
@@ -127,7 +131,7 @@ LEFT JOIN student ON semester_course.semester_course_id=student.semester_course_
                         ON student.speciality_code=speciality.speciality_code
                         LEFT JOIN `semester_course`
                         ON mark_on_exam.semester_course_id=semester_course.semester_course_id", // условие
-                'order' => 'semester_course.studiyng_year ASC, semester_course.semester_number ASC, semester_course.speciality_code, student.group_number, mark_on_exam.attestation_number, mark_on_exam.subject_id,student.surname, student.name,student.student_id' // сортируем
+                'order' => 'semester_course.studiyng_year ASC, semester_course.semester_number ASC, semester_course.speciality_code, student.group_number,student.name,student.student_id, mark_on_exam.attestation_number, mark_on_exam.subject_id,student.surname' // сортируем
 
             );
             $where = $this->getWhere($params);
@@ -151,6 +155,7 @@ LEFT JOIN student ON semester_course.semester_course_id=student.semester_course_
                     return NULL;
                 }
             }
+//            print_arr($sheet);
             $temp_row=$sheet[array_key_first($sheet)];
 
             $students = [];
@@ -161,22 +166,23 @@ LEFT JOIN student ON semester_course.semester_course_id=student.semester_course_
 //                print_r($value);
 //                echo '<br />';
             }
+//            print_arr($subjects);
 
-            $subjects= array_unique($subjects);
+            $subjects= array_unique($subjects,SORT_REGULAR);
             $attsCount=3;
             $attsOnSubject=[];
-//            print_r($subjects);
+//            print_arr($subjects);
             foreach ($subjects as $subject)
             {
                 $subject_name=$subject['subject_name'];
                 $subject_row=array_filter($sheet,function ($item) use ($subject_name) {
                     return $item['subject_name']== $subject_name;
                 });
-                $arr=array_unique(array_column($subject_row, 'attestation_number'));
+                $arr=array_unique(array_column($subject_row, 'attestation_number'),SORT_REGULAR);
                 natsort($arr);
                 $attsOnSubject[$subject_name]=$arr;
             }
-//            print_r($attsOnSubject);
+//            print_arr($attsOnSubject);
             while (count($sheet) != 0)
             {
                 $student=[];
@@ -187,9 +193,12 @@ LEFT JOIN student ON semester_course.semester_course_id=student.semester_course_
 //                print_arr($student);
 //                echo ' <br /> ';
                 array_push($students,$student);
+                $student=[];
 
             }
+
             $student_rows=[];
+//            print_arr($students);
             foreach ($students as $student_number => $student)
             {
 //                print_arr($student);
@@ -201,6 +210,7 @@ LEFT JOIN student ON semester_course.semester_course_id=student.semester_course_
 //                print_arr($student_row);
                 $temp_student=$student;
                 foreach ($attsOnSubject as $subject=>$attsNumbers){
+//                    $subjectAddedIndicator=false;
                     foreach ($attsNumbers as $attsNumber){
                         $nextAttIndicator=false;
                         foreach ($temp_student as $key=>$student_note) {
@@ -209,6 +219,7 @@ LEFT JOIN student ON semester_course.semester_course_id=student.semester_course_
                             if( $student_note['subject_name']==$subject and $student_note['attestation_number']=$attsNumber){
                                 $student_row[$subject][$attsNumber]=$student_note['mark'];
 //                                print_arr($student_row);
+                                $subjectAddedIndicator=true;
                                 $nextAttIndicator=true;
                                 unset($temp_student[$key]);
                                 break;
@@ -218,8 +229,10 @@ LEFT JOIN student ON semester_course.semester_course_id=student.semester_course_
                             $student_row[$subject][$attsNumber]=0;
                         }
                     }
-                    $student_row[$subject]['result']=(double)array_sum($student_row[$subject])/$attsCount;
-                    print_arr($student_row);
+                    $student_row[$subject]['result']=round((double)array_sum($student_row[$subject])/count($attsNumbers));
+//                    print_arr($student_row);
+
+
                 }
 //                print_arr($student_row);
                 array_push($student_rows,$student_row);
