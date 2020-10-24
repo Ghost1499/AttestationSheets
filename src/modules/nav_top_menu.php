@@ -1,4 +1,4 @@
 <nav class="bar" id="nav-top-menu">
-    <a class="bar-item w3-hover-blue-gray btn" href="/" id="home-item">Выйти</a>
+    <a href="/logout" class="bar-item w3-hover-blue-gray btn"  id="home-item">Выйти</a>
     <a href="/sheets" class="bar-item w3-hover-blue-gray btn" id="sheets-item">Все ведомости</a>
 </nav>

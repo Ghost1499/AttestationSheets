@@ -4,15 +4,14 @@
     class Model_user extends Model_Base
     {
 
-        public $id;
-        public $login;
-        public $password;
-        public $type;
+        public $user_id;
+        public $user_login;
+        public $user_password;
+        public $user_type;
 
-        public function __construct() { }
 
         public function fieldsTable()
         {
-           return array('id'=>'user_id','login'=>'user_login','password'=>'user_password','type'=>'user_type');
+           return array('user_id'=>'user_id','user_login'=>'user_login','user_password'=>'user_password','user_type'=>'user_type');
         }
     }

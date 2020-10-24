@@ -1,7 +1,10 @@
-<div id="attestation-sheet-header">
-    <h1>Свод оценок рубежных аттестаций за октябрь - декабрь 2019 г. студентов 3 курса направления
-        "Информационные системы"
-    </h1>
+<div id="attestation-sheet-header" class="w3-card-4 w3-round-xxlarge w3-pale-yellow">
+    <?php
+            echo "<h1>Свод оценок рубежных аттестаций за ".$semester_number." семестр ".$studiyng_year." г. студентов ".$course_number." курса направления ".$speciality_code." ".$speciality_name." ".$group_number." группа <h1>";
+            ?>
+<!--    <h1>Свод оценок рубежных аттестаций за октябрь - декабрь 2019 г. студентов 3 курса направления-->
+<!--        "Информационные системы"-->
+<!--    </h1>-->
 </div>
 <div id="attestation-sheet">
     <?php
@@ -34,7 +37,7 @@
     <script>
         $(document).ready(function () {
             $('#attestation-table').colorize();
-
+            // alert('done');
         });
     </script>
 </div>

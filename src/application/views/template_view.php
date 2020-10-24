@@ -7,11 +7,14 @@
     <script type="text/javascript" src=" https://code.jquery.com/jquery-1.11.2.js "></script>
     <script src="http://attestationsheets/js/includeHTML.js"></script>
     <script src="http://attestationsheets/js/jquery.colorize-2.0.0.js"></script>
+
 <!--    <link rel="icon" type="image/png" href="http://faviconka.ru/ico/faviconka_ru_1018.png" />-->
     <title>Страница аттестационной ведомости</title>
 </head>
 <body>
-<div data-src="http://attestationsheets/modules/nav_top_menu.html"></div>
+<!--<div data-src="http://attestationsheets/modules/nav_top_menu.html"></div>-->
+<?php include SITE_PATH.DS."modules".DS."nav_top_menu.php" ?>
+
 <div class="main">
 <?php include APP_PATH.DS.'views'.DS.$content_view; ?>
 </div>

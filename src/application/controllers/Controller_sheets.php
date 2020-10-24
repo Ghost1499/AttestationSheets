@@ -18,8 +18,18 @@
             $this->selection_names = $selectionNames;
         }
 
+        private function checkAuthentication(){
+            if(!isset($_SESSION['user_id'])){
+                Router::ErrorPage404();
+//                die('');
+            }
+        }
+
         public function action_index($params = null)
         {
+            session_start();
+//            print_r($_SESSION);
+            $this->checkAuthentication();
 
             $select = array('select' => 'DISTINCT mark_on_exam.semester_course_id AS sem_course_id,'. /*, mark_on_exam.attestation_number as att_number*/ 'semester_course.semester_number as semester_number,semester_course.course_number as course_number,semester_course.studiyng_year as studiyng_year,speciality.speciality_name as spec_name, semester_course.speciality_code as speciality_code, student.group_number as group_number',
 
@@ -53,6 +63,8 @@ LEFT JOIN student ON semester_course.semester_course_id=student.semester_course_
          */
         public function action_sheet($params)
         {
+            session_start();
+            $this->checkAuthentication();
             if (!is_array($params))
             {
                 throw new Exception("Controller_sheets action_sheet error");

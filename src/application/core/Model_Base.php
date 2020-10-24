@@ -34,6 +34,10 @@
         }
 
         // получить все записи
+
+        /**
+         * @return bool|array
+         */
         function getAllRows()
         {
             if (!isset($this->dataResult) OR empty($this->dataResult))

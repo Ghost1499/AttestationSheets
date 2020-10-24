@@ -108,8 +108,17 @@
         {
 
             $route=$this->_setRoute($_SERVER['REQUEST_URI']);
+            $params=null;
+            if(!empty($_POST) and is_array($_POST)){
+                foreach ($_POST as $key=>$value){
+                    $params[$key]=htmlentities($value);
+                }
+            }
+           /* print_r($_POST);
+            echo (int)(empty($_POST));*/
+            //$params=
 //            echo $route;
-            $url=new MyUrl($route);
+            $url=new MyUrl($route,$params);
             // Анализируем путь
             //$track=null;
             try{
