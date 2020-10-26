@@ -52,6 +52,9 @@ LEFT JOIN student ON semester_course.semester_course_id=student.semester_course_
             $this->marks = new Model_mark_on_exam($select); // создаем объект модели
             $sheets_data = $this->marks->getAllRows(); // получаем все строки
 //            print_arr($sheets_data);
+            if(!$sheets_data){
+                $sheets_data=[];
+            }
             
             $selectionNames = $this->selection_names;
             $data = compact('sheets_menu_data', 'sheets_data', 'selectionNames');

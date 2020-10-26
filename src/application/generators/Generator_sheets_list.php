@@ -18,6 +18,10 @@
             if(!is_array($data)){
                 throw new Exception("SheetList error");
             }
+            if(empty($data)){
+                echo "<h2>Подходящих ведомостей нет!</h2>";
+                return;
+            }
             foreach ($data as $item){
                 $this->printRow($this->action, $item);
             }
